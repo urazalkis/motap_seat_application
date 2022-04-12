@@ -1,0 +1,1 @@
+enum PreferencesKeys {admin,staffName,staffId,departmentId,departmentName,dbName, dbUserName,dbPassword,userName,password}
