@@ -6,6 +6,7 @@ import 'package:motaperp_seat_application/core/constant/enum/locale_keys_enum.da
 import 'package:motaperp_seat_application/core/constant/url/url_icon.dart';
 import 'package:motaperp_seat_application/core/init/cache/locale_manager.dart';
 import 'package:motaperp_seat_application/core/init/navigation/navigation_route.dart';
+import 'package:motaperp_seat_application/core/init/navigation/navigation_service.dart';
 import 'package:motaperp_seat_application/core/widget/button/elevated_circular_login_button.dart';
 import 'package:motaperp_seat_application/core/widget/icon/icon_widget.dart';
 import 'package:motaperp_seat_application/core/widget/text_field/text_form_field_password.dart';
@@ -47,7 +48,7 @@ final String hintTextDbPassword="DB Şifre";
         width: MediaQuery.of(context).size.width,
         decoration: ColorConstants.instance.appBackgroundColor,
         child: WillPopScope(
-          onWillPop: () => NavigationRoute.instance.quitApp(),
+          onWillPop: () => NavigationService.instance.quitApp(),
           child:  Center(
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,

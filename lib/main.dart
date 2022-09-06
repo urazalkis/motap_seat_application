@@ -6,6 +6,7 @@ import 'package:motaperp_seat_application/core/init/notifier/provider_list.dart'
 import 'package:provider/provider.dart';
 import 'core/constant/navigation/navigation_constants.dart';
 import 'core/init/navigation/navigation_route.dart';
+import 'core/init/network/connection_activity/connection_activity.dart';
 import 'core/init/notifier/bloc_list.dart';
 
 
@@ -30,8 +31,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           onGenerateRoute: NavigationRoute.instance.generateRoute,
           navigatorKey: NavigationService.instance.navigatorKey,
-          // initialRoute: NavigationRoute.instance.initialRoute(),
-          initialRoute:NavigationConstants.TASK_ORDER,
+          initialRoute: NavigationRoute.instance.initialRoute(),
+
+          //initialRoute:NavigationConstants.TASK_ORDER,
 
 
         ),

@@ -1,6 +1,6 @@
-import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:motaperp_seat_application/core/constant/design/color_constant.dart';
+import 'package:motaperp_seat_application/core/widget/scrollBar/custom_scrollbar.dart';
 
 class CustomDataTable extends StatelessWidget {
 final List<dynamic> dataList;
@@ -10,7 +10,7 @@ const CustomDataTable({Key? key,required this.dataList,required this.columns,req
 
   @override
   Widget build(BuildContext context) {
-    return  DataTable2(
+    return  DataTable(
       headingTextStyle:const TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.bold),
@@ -18,9 +18,9 @@ const CustomDataTable({Key? key,required this.dataList,required this.columns,req
           color: ColorConstants.instance.customBlueColor,
           fontWeight: FontWeight.bold),
       showCheckboxColumn: false,
-      columnSpacing: 5,
+      columnSpacing: 10,
       headingRowHeight: 50,
-      minWidth: MediaQuery.of(context).size.width,
+     // minWidth: MediaQuery.of(context).size.width,
       horizontalMargin: 12,
       showBottomBorder: true,
       columns: columns,

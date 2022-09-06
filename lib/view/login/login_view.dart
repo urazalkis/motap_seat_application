@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:motaperp_seat_application/core/base/view/base_view.dart';
 import 'package:motaperp_seat_application/core/constant/design/color_constant.dart';
 import 'package:motaperp_seat_application/core/constant/enum/locale_keys_enum.dart';
 import 'package:motaperp_seat_application/core/constant/url/url_icon.dart';
+import 'package:motaperp_seat_application/core/extension/context_extension.dart';
 import 'package:motaperp_seat_application/core/init/cache/locale_manager.dart';
 import 'package:motaperp_seat_application/core/init/navigation/navigation_route.dart';
+import 'package:motaperp_seat_application/core/init/navigation/navigation_service.dart';
 import 'package:motaperp_seat_application/core/widget/alertDialog/alert_dialog_question.dart';
 import 'package:motaperp_seat_application/core/widget/button/elevated_circular_login_button.dart';
 import 'package:motaperp_seat_application/core/widget/icon/icon_widget.dart';
@@ -15,7 +18,84 @@ import 'package:provider/src/provider.dart';
 
 import 'login_view_model.dart';
 
-class LoginView extends StatefulWidget {
+class LoginView extends StatelessWidget {
+  const LoginView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BaseView<LoginViewModel>(
+        viewModel: LoginViewModel(),
+      init: (viewModel) {
+        viewModel.setContext(context);
+        viewModel.init();
+      },
+        onPageBuilder: (BuildContext context, LoginViewModel viewModel) => Scaffold(
+      body: Container(
+      height: context.screenHeight,
+      width:  context.screenWidth,
+      decoration: ColorConstants.instance.appBackgroundColor,
+      child: WillPopScope(
+        onWillPop: () => NavigationService.instance.quitApp(),
+        child:  Center(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 30, 10, 30),
+              child: Column(
+                children:  [
+                  IconWidget(iconUrl: UrlIcon.instance.appIconUrl, height: context.screenHeight/4,),
+                  Text("MoTap Koltuk", style:Theme.of(context).textTheme.headline6!.apply(color: Colors.white)),
+                  const SizedBox(height: 20,),
+                  Form(
+                    key: context.watch<LoginViewModel>().formKey,
+                    child: Column(
+                      children: [
+                        Padding(padding:EdgeInsets.all(context.screenHeight/30),child: TextFormFieldStandard(tfController:context.watch<LoginViewModel>().userNameController,hintText: "Kullanıcı Adı",)),
+                        Padding(padding:EdgeInsets.all(context.screenHeight/30),child: TextFormFieldPassword(tfController: context.watch<LoginViewModel>().passwordController,hintText: "Şifre", showPasswordState: () {context.read<LoginViewModel>().changeShowPassword();}, showPassword: context.watch<LoginViewModel>().showPassword,)),
+                        Padding(padding:EdgeInsets.all(context.screenHeight/30),child: ElevatedCircularLoginButton(onPressed:(){context.read<LoginViewModel>().fetchLoginService();},
+                          title: "Giriş Yap",primaryColor:ColorConstants.instance.loginButtonColor,isLoading: context.watch<LoginViewModel>().isLoading,),
+                        ),
+                        const SizedBox(height: 10,),
+                        Align(
+                          alignment: Alignment.center,
+                          child: GestureDetector(
+                              onTap: () async {
+                                showDialog(
+                                    context: context, builder: (BuildContext context){
+                                  return AlertDialogQuestion(
+                                    text: "Cache verilerini temizlemek istiyor musunuz?Bu işlemi yetkili değilseniz yapmayınız",
+                                    onpressedConfirm: () {
+                                      context.read<LoginViewModel>().clearCacheAndGoRegister();
+                                    },
+
+                                    textColor: ColorConstants.instance.customBlueColor,);
+                                }
+                                );
+
+                              },
+                              child: Text("Tüm Cache Verilerini Temizle",style: TextStyle(fontSize: context.screenWidth/25,color: Colors.orange),)),
+                        ),
+                      ],
+                    ),
+                  ),
+
+
+                ],
+              ),
+            ),
+          ),
+        ),
+
+      ),
+    ),
+    ),
+
+    );
+  }
+}
+
+
+/*class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
 
   @override
@@ -112,5 +192,5 @@ final String textIconExit = "Çıkış";
       ),
     );
   }
-}
+}*/
 

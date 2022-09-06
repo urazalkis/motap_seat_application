@@ -6,6 +6,8 @@ import 'package:motaperp_seat_application/core/constant/design/color_constant.da
 import 'package:motaperp_seat_application/core/constant/enum/locale_keys_enum.dart';
 import 'package:motaperp_seat_application/core/constant/url/url_icon.dart';
 import 'package:motaperp_seat_application/core/init/cache/locale_manager.dart';
+import 'package:motaperp_seat_application/core/init/navigation/navigation_route.dart';
+import 'package:motaperp_seat_application/core/init/navigation/navigation_service.dart';
 import 'package:motaperp_seat_application/core/widget/icon/icon_widget.dart';
 import 'package:motaperp_seat_application/view/scan/scan_view_model.dart';
 import 'package:provider/src/provider.dart';
@@ -40,7 +42,7 @@ class _ScanViewState extends State<ScanView> {
         flexibleSpace: Container(
           decoration: ColorConstants.instance.appBackgroundColor,
         ),
-        leading: IconButton(icon:const Icon(Icons.arrow_back),color: ColorConstants.instance.customBlueColor, onPressed: () { context.read<ScanViewModel>().navigateToBack();},),
+        leading: IconButton(icon:const Icon(Icons.arrow_back),color: ColorConstants.instance.customBlueColor, onPressed: () {context.read<ScanViewModel>().navigateToBack();},),
         title:  Text(appBarTitle,style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
       ),
       body: Container(
@@ -64,7 +66,7 @@ class _ScanViewState extends State<ScanView> {
                           enabled: false,
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
-                            fillColor: Colors.white70,
+                            fillColor: Colors.white,
                             hintMaxLines: 2,
                             filled: true,
                             border: OutlineInputBorder(
@@ -88,7 +90,7 @@ class _ScanViewState extends State<ScanView> {
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
                             hintMaxLines: 2,
-                            fillColor: Colors.white70,
+                            fillColor: Colors.white,
                             filled: true,
                             border: OutlineInputBorder(
                               borderRadius:BorderConstant.instance.radiusAllCircularMin,

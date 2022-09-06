@@ -6,23 +6,35 @@ import 'package:motaperp_seat_application/core/init/cache/locale_manager.dart';
 import 'package:motaperp_seat_application/core/init/navigation/navigation_route.dart';
 import 'package:motaperp_seat_application/core/init/navigation/navigation_service.dart';
 import 'package:motaperp_seat_application/core/widget/message/toast_message.dart';
+import 'package:motaperp_seat_application/view/register/register_model.dart';
+import 'package:motaperp_seat_application/view/task_order/task_order_model.dart';
+import 'package:motaperp_seat_application/view/task_order/task_order_model_response.dart';
 import 'package:motaperp_seat_application/view/task_order/task_order_service.dart';
 
 class ScanViewModel extends ChangeNotifier {
 
   LocaleManager localeManager = LocaleManager.instance;
-  late String qrCodeResult="20210915134512";
+  //String qrCodeResult="20210915134512";
+  late String qrCodeResult;
   String? staffName;
   String? departmentId;
   String? departmentName;
 
+  late String dbName;
+  late String dbUserName;
+  late String dbPassword;
+  void setDbInformation(){
+    dbName =  localeManager.getStringValue(PreferencesKeys.dbName);
+    dbUserName =   localeManager.getStringValue(PreferencesKeys.dbUserName);
+    dbPassword =   localeManager.getStringValue(PreferencesKeys.dbPassword);
+  }
   Future<void> goToScan(BuildContext context) async {
 
    try {
-     final response = await TaskOrderService.instance.orderInformation(qrCodeResult);
+     final response = await TaskOrderService.instance.orderInformation(TaskOrderModel(qrCodeResult: qrCodeResult, registerModel: RegisterModel(dbName,dbUserName,dbPassword)),TaskOrderResponseModel());
 
      if (response!.success == 1) {
-       navigateToTaskOrder();
+       NavigationService.instance.navigateToPageClear(path: NavigationConstants.TASK_ORDER);
      }
      else if (response.success == 0) {
        ToastMessage.instance.errorMessage(
@@ -79,8 +91,5 @@ Future<void> getStaffInformation() async {
 
     return true;
   }
-Future<bool> navigateToTaskOrder() async {
-  await NavigationService.instance.navigateToPage(path: NavigationConstants.TASK_ORDER);
-  return true;
-}
+
 }

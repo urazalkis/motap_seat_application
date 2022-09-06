@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:motaperp_seat_application/core/constant/enum/locale_keys_enum.dart';
 import 'package:motaperp_seat_application/core/init/cache/locale_manager.dart';
-import 'package:motaperp_seat_application/core/constant/navigation/navigation_constants.dart';
-import 'package:motaperp_seat_application/core/init/navigation/navigation_service.dart';
+import 'package:motaperp_seat_application/view/reports/base/staff/staff_response.dart';
+
+import 'current/current_model_response.dart';
 
 class BaseReportViewModel extends ChangeNotifier{
   bool isSearching = false;
@@ -16,6 +17,9 @@ class BaseReportViewModel extends ChangeNotifier{
   List<String>? itemIdList = [];
   List<String>? itemNameList = [];
 
+  late String dbName;
+  late String dbUserName;
+  late String dbPassword;
 
   String? getDropdownValueId(String? selectedData){
     if(selectedData!=null){
@@ -30,7 +34,7 @@ class BaseReportViewModel extends ChangeNotifier{
     }
 
   }
-  void fillDataList(List<dynamic> list,List<String>? itemNameList,List<String>? itemIdList){
+  void fillCurrentList(List<Current> list,List<String>? itemNameList,List<String>? itemIdList){
 
     for (var element in list) {
       itemNameList?.add(element.currentName);
@@ -38,10 +42,13 @@ class BaseReportViewModel extends ChangeNotifier{
     }
 
   }
-  Future<bool> navigateToBack() async {
-    clear();
-    await NavigationService.instance.navigateToPageClear(path: NavigationConstants.ADMIN_MENU);
-    return true;
+  void fillStaffList(List<StaffResponseModel> list,List<String>? itemNameList,List<String>? itemIdList){
+
+    for (var element in list) {
+      itemNameList?.add(element.name!);
+      itemIdList?.add(element.id!);
+    }
+
   }
 
 
@@ -50,6 +57,11 @@ class BaseReportViewModel extends ChangeNotifier{
     notifyListeners();
   }
 
+  void setDbInformation(){
+    dbName =  localeManager.getStringValue(PreferencesKeys.dbName);
+    dbUserName =   localeManager.getStringValue(PreferencesKeys.dbUserName);
+    dbPassword =   localeManager.getStringValue(PreferencesKeys.dbPassword);
+  }
   Map baseMapData(){
     Map data = {
       'db_name': localeManager.getStringValue(PreferencesKeys.dbName),

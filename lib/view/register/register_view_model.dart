@@ -45,27 +45,28 @@ try {
     localeManager.setStringValue(PreferencesKeys.dbUserName, dbUserNameController!.text);
     localeManager.setStringValue(PreferencesKeys.dbPassword, dbPasswordController!.text);
     formKey.currentState!.reset();
-    changeLoading();
+    dbNameController!.clear();
+    dbUserNameController!.clear();
+    dbPasswordController!.clear();
+
      notifyListeners();
 
-     navigateToLogin();
+    NavigationService.instance.navigateToPageClear(path: NavigationConstants.LOGIN);
 
     }
     else if (response.success == 0) {
      ToastMessage.instance.errorMessage(errorMessage: response.errorMessage);
-     changeLoading();
      notifyListeners();
     }
     else if (response.success == -1) {
       ToastMessage.instance.errorMessage(errorMessage: response.errorMessage);
-      changeLoading();
       notifyListeners();
     }
     else {
       ToastMessage.instance.dbConnectionErrorMessage();
-      changeLoading();
      notifyListeners();
     }
+    changeLoading();
   }
 
   }
@@ -79,10 +80,6 @@ catch(e){
     dbPasswordController!.clear();
     isLoading = false;
     showPassword = false;
-  }
-  Future<bool> navigateToLogin() async {
-    await NavigationService.instance.navigateToPageClear(path: NavigationConstants.LOGIN);
-    return true;
   }
 
 

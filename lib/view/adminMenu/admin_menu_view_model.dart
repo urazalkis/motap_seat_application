@@ -16,14 +16,5 @@ class AdminMenuViewModel{
     LocaleManager.instance.clearStringValue(PreferencesKeys.admin);
     LocaleManager.instance.clearStringValue(PreferencesKeys.departmentId);
   }
-  Future<bool> navigateToScan() async {
-    await NavigationService.instance.navigateToPageClear(path: NavigationConstants.SCAN);
-    return true;
 
-  }
-  Future<bool> navigateToOrderReport() async {
-    await NavigationService.instance.navigateToPageClear(path: NavigationConstants.ORDER_REPORT);
-    return true;
-
-  }
 }

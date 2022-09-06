@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:motaperp_seat_application/core/init/navigation/navigation_route.dart';
 
 import 'navigation_service_interface.dart';
 
@@ -22,6 +23,16 @@ class NavigationService implements INavigationService {
   @override
   Future<void> navigateToPageClear({String? path, Object? data}) async {
     await navigatorKey.currentState!.pushNamedAndRemoveUntil(path!, removeAllOldRoutes, arguments: data);
+  }
+  Future<bool> quitApp() async
+  {
+    SystemNavigator.pop();
+    exit(0);
+  }
+  Future<bool> returnBack(BuildContext context) async
+  {
+    Navigator.pop(context);
+    return true;
   }
 
 }

@@ -19,11 +19,11 @@ class ApplicationProvider {
 
   List<SingleChildWidget> singleItems = [];
   List<dynamic> dependItems = [
-    ChangeNotifierProvider(create: (_) => RegisterViewModel()),
-    ChangeNotifierProvider(create: (_) => LoginViewModel()),
-    ChangeNotifierProvider(create: (_) => ScanViewModel()),
-    ChangeNotifierProvider(create: (_) => BaseReportViewModel()),
-    ChangeNotifierProvider(create: (_) => TaskOrderViewModel()),
+    ChangeNotifierProvider(create: (_) => RegisterViewModel(),lazy: true,),
+    ChangeNotifierProvider(create: (_) => LoginViewModel(),lazy: true,),
+    ChangeNotifierProvider(create: (_) => ScanViewModel(),lazy: true,),
+    ChangeNotifierProvider(create: (_) => BaseReportViewModel(),lazy: true,),
+    ChangeNotifierProvider(create: (_) => TaskOrderViewModel(),lazy: true,),
     Provider.value(value: NavigationService.instance)
 
   ];

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:motaperp_seat_application/core/constant/design/border_constant.dart';
+import 'package:motaperp_seat_application/core/constant/design/color_constant.dart';
 import 'package:motaperp_seat_application/core/widget/button/text_button_icon.dart';
 
 class AlertDialogQuestion extends StatelessWidget {
@@ -14,7 +15,8 @@ class AlertDialogQuestion extends StatelessWidget {
     return AlertDialog(
       content:Text(text,style: TextStyle(color: textColor,fontWeight: FontWeight.bold),),
       title:const Icon(Icons.help),
-      shape: OutlineInputBorder(borderRadius:BorderConstant.instance.radiusAllCircularMedium),
+      shape: RoundedRectangleBorder(borderRadius:BorderConstant.instance.radiusAllCircularMedium),
+
       actions: [
         TextButtonIcon(
           onPressed: onpressedConfirm,
@@ -32,6 +34,7 @@ class AlertDialogQuestion extends StatelessWidget {
           text: "Çık",
           textColor: Colors.red,
         ),
+
       ],
     );
   }

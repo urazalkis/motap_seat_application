@@ -2,9 +2,10 @@ import 'dart:ffi';
 
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:motaperp_seat_application/core/constant/design/border_constant.dart';
 import 'package:motaperp_seat_application/core/constant/design/color_constant.dart';
 import 'package:motaperp_seat_application/view/reports/base/base_report_view_model.dart';
-import 'package:motaperp_seat_application/view/reports/orderReport/order_report_cubit.dart';
+import 'package:motaperp_seat_application/view/reports/order/orderReport/order_report_cubit.dart';
 import 'package:provider/src/provider.dart';
 
 //typedef VoidCallbackParameter = void Function(String? selectedData,String? selectedItemId,List<String>? itemList,List<String>? itemIdList);
@@ -30,7 +31,8 @@ class _CustomDropDownSearchButtonState extends State<CustomDropDownSearchButton>
   @override
   Widget build(BuildContext context) {
     return DropdownSearch<String>(
-      mode: Mode.MENU,
+      popupShape: RoundedRectangleBorder(borderRadius:BorderConstant.instance.radiusAllCircularMedium),
+      mode: Mode.DIALOG,
       popupBackgroundColor: Colors.white,
       showSearchBox: true,
       searchFieldProps: TextFieldProps(decoration: InputDecoration(
